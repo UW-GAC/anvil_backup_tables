@@ -1,0 +1,7 @@
+version: 1.2
+workflows:
+   - name: anvil_backup_tables
+     subclass: WDL
+     primaryDescriptorPath: /anvil_backup_tables.wdl
+     testParameterFiles:
+         - /anvil_backup_tables.json
