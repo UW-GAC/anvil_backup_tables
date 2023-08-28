@@ -4,11 +4,14 @@ workflow anvil_backup_tables {
   input {
     String name
   }
-  call backup_tables
+  call backup_tables { input: name=name }
 }
 
 
 task backup_tables {
+  input {
+    String name
+  }
   command {
     bash echo "Hello ${name}!"
   }
