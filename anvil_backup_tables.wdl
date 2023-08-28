@@ -2,26 +2,38 @@ version 1.0
 
 workflow anvil_backup_tables {
   input {
-    String name
+    String workspace_namespace
+    String workspace_name
+    String bucket_path
   }
   call backup_tables {
-    input: name=name
+    input: workspace_namespace=workspace_namespace,
+      workspace_name=workspace_name,
+      bucket_path=bucket_path
+  }
+  output {
+    # Files.
+    Array[File] tables = backup_tables.tables
   }
 }
 
 
 task backup_tables {
   input {
-    String name
+    String workspace_namespace
+    String workspace_name
+    String bucket_path
   }
   command {
     set -e
     Rscript /usr/local/anvil_backup_tables/anvil_backup_tables.R \
-        --name ~{name}
+        --workspace_namespace ~{workspace_namespace} \
+        --workspace_name ~{workspace_name}
+        --bucket_path ~{bucket_path}
   }
   output {
-    # Write output to standard out
-    File output_greeting = stdout()
+    # Files.
+    Array[File] tables = glob("*.tsv")
   }
   runtime {
     # Pull from DockerHub
