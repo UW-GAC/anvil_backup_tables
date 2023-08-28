@@ -4,7 +4,7 @@ workflow anvil_backup_tables {
   input {
     String workspace_namespace
     String workspace_name
-    String bucket_path
+    String output_bucket_path
   }
   call backup_tables {
     input: workspace_namespace=workspace_namespace,
