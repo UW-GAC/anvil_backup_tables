@@ -1,7 +1,33 @@
 library(argparser)
 library(magrittr)
+library(AnVIL)
+sessionInfo()
 
 argp <- arg_parser("anvil_backup_tables") %>%
-    add_argument("--name", help="Name to say hello to")
+    add_argument("--workspace-name", help="Name of workspace to operate on") %>%
+    add_argument("--workspace-namespace", help="Namespace of workspace to operate on") %>%
+    add_argument("--bucket-path", help="Output directory in cloud bucket")
+argv <- parse_args(argp)
+print(argv)
 
-sprintf("Hello world!")
+# # Create a tempdir in which to store the data tables.
+# tmpdir <- tempdir()
+
+# Loop over tables and write a tsv.
+tables <- avtables(namespace=argv$workspace_namespace, name=argv$workspace_name)$table
+for (t in tables) {
+    message(sprintf("Backing up %s", t))
+    table <- avtable(t)
+    # outfile <- file.path(tmpdir, sprintf("%s.tsv", table))
+    outfile <- sprintf("%s.tsv", table)
+    write_tsv(table, outfile)
+}
+
+# Print the files out (for testing?).
+# list.files(tmpdir)
+list.files()
+
+# # Copy the output to the final destination.
+# gsutil_cp(file.path(tmpdir, "*"), bucket_path)
+
+message("Done!")
