@@ -13,4 +13,8 @@ task backup_tables {
     # Write output to standard out
     File output_greeting = stdout()
   }
+  runtime {
+    # Pull from DockerHub
+    docker: "bioconductor/bioconductor_docker:latest"
+  }
 }
