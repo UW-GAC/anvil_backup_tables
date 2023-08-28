@@ -7,7 +7,7 @@ sessionInfo()
 argp <- arg_parser("anvil_backup_tables") %>%
     add_argument("--workspace-name", help="Name of workspace to operate on") %>%
     add_argument("--workspace-namespace", help="Namespace of workspace to operate on") %>%
-    add_argument("--bucket-path", help="Output directory in cloud bucket")
+    add_argument("--output-bucket-path", help="Output directory in cloud bucket")
 argv <- parse_args(argp)
 print(argv)
 
@@ -28,6 +28,6 @@ for (t in tables) {
 list.files(tmpdir)
 
 # # Copy the output to the final destination.
-gsutil_cp(file.path(tmpdir, "*"), bucket_path)
+gsutil_cp(file.path(tmpdir, "*"), argv$output_bucket_path)
 
 message("Done!")

@@ -9,7 +9,7 @@ workflow anvil_backup_tables {
   call backup_tables {
     input: workspace_namespace=workspace_namespace,
       workspace_name=workspace_name,
-      bucket_path=bucket_path
+      output_bucket_path=output_bucket_path
   }
   output {
     # Files.
@@ -22,14 +22,14 @@ task backup_tables {
   input {
     String workspace_namespace
     String workspace_name
-    String bucket_path
+    String output_bucket_path
   }
   command {
     set -e
     Rscript /usr/local/anvil_backup_tables/anvil_backup_tables.R \
         --workspace-namespace ~{workspace_namespace} \
         --workspace-name ~{workspace_name} \
-        --bucket-path ~{bucket_path}
+        --output-bucket-path ~{output_bucket_path}
   }
   output {
     # Files.
