@@ -1,5 +1,6 @@
 library(argparser)
 library(magrittr)
+library(readr)
 library(AnVIL)
 sessionInfo()
 
@@ -17,10 +18,10 @@ print(argv)
 tables <- avtables(namespace=argv$workspace_namespace, name=argv$workspace_name)$table
 for (t in tables) {
     message(sprintf("Backing up %s", t))
-    table <- avtable(t)
+    table_data <- avtable(t, namespace=argv$workspace_namespace, name=argv$workspace_name)
     # outfile <- file.path(tmpdir, sprintf("%s.tsv", table))
-    outfile <- sprintf("%s.tsv", table)
-    write_tsv(table, outfile)
+    outfile <- sprintf("%s.tsv", t)
+    write_tsv(table_data, outfile)
 }
 
 # Print the files out (for testing?).
