@@ -14,6 +14,7 @@ workflow anvil_backup_tables {
   output {
     # Files.
     Array[File] tables = backup_tables.tables
+    File testfile = backup_tables.testfile
   }
 }
 
@@ -34,6 +35,7 @@ task backup_tables {
   output {
     # Files.
     Array[File] tables = glob("*.tsv")
+    File testfile = "analysis.tsv"
   }
   runtime {
     # Pull from DockerHub
