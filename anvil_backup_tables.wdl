@@ -25,6 +25,6 @@ task backup_tables {
   }
   runtime {
     # Pull from DockerHub
-    docker: "bioconductor/bioconductor_docker:latest"
+    docker: "amstilp/anvil-backup-tables-devel:latest"
   }
 }
