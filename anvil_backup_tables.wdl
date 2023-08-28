@@ -13,7 +13,7 @@ task backup_tables {
     String name
   }
   command {
-    bash echo "Hello ${name}!"
+    echo "Hello ${name}!"
   }
   output {
     # Write output to standard out
