@@ -1,13 +1,16 @@
 version 1.0
 
 workflow anvil_backup_tables {
+  input {
+    String name
+  }
   call backup_tables
 }
 
 
 task backup_tables {
   command {
-    echo "Hello world!"
+    bash echo "Hello ${name}!"
   }
   output {
     # Write output to standard out
