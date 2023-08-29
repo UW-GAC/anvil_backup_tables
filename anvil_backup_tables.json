@@ -1,5 +1,5 @@
 {
     "anvil_backup_tables.workspace_namespace": "primed-adrienne",
     "anvil_backup_tables.workspace_name": "primed-sandbox",
-    "anvil_backup_tables.output_bucket_path": "gs://fc-3d08b7c0-2620-49a1-8340-a4731592cb1d/backup_tables"
+    "anvil_backup_tables.output_bucket_path": "test_backup_tables"
 }
