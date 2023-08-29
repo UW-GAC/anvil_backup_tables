@@ -34,7 +34,7 @@ gsutil_cp("*.tsv", file.path(bucket, argv$output_directory))
 
 # Save the json file with table inputs.
 outfile <- "table_files.json"
-writeLines(toJSON(table_json), outfile)
+writeLines(toJSON(table_json, auto_unbox=TRUE), outfile)
 gsutil_cp(outfile, file.path(bucket, argv$output_directory))
 
 message("Done!")
