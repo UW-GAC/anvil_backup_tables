@@ -6,9 +6,9 @@ library(AnVIL)
 sessionInfo()
 
 argp <- arg_parser("anvil_backup_tables") %>%
-    add_argument("--workspace-name", help="Name of workspace to operate on") %>%
-    add_argument("--workspace-namespace", help="Namespace of workspace to operate on") %>%
-    add_argument("--output-directory", help="Directory to copy files to in workspace bucket")
+    add_argument("--workspace_name", help="Name of workspace to operate on") %>%
+    add_argument("--workspace_namespace", help="Namespace of workspace to operate on") %>%
+    add_argument("--output_directory", help="Directory to copy files to in workspace bucket")
 argv <- parse_args(argp)
 print(argv)
 
@@ -35,6 +35,7 @@ gsutil_cp("*.tsv", file.path(bucket, argv$output_directory))
 # Save the json file with table inputs.
 outfile <- "table_files.json"
 writeLines(toJSON(table_json, auto_unbox=TRUE), outfile)
+# Copy to the final destination.
 gsutil_cp(outfile, file.path(bucket, argv$output_directory))
 
 message("Done!")

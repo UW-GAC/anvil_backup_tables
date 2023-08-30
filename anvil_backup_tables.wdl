@@ -27,9 +27,9 @@ task backup_tables {
   command {
     set -e
     Rscript /usr/local/anvil_backup_tables/anvil_backup_tables.R \
-        --workspace-namespace ~{workspace_namespace} \
-        --workspace-name ~{workspace_name} \
-        --output-directory ~{output_directory}
+        --workspace_namespace ~{workspace_namespace} \
+        --workspace_name ~{workspace_name} \
+        --output_directory ~{output_directory}
   }
   output {
     # Files.
